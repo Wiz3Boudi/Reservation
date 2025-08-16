@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const container = document.createElement('div');
       container.className = 'container'
       document.body.appendChild(container)
-
+      // craete header / h1
       const header = document.createElement('div');
       header.className = 'header';
       container.appendChild(header);
@@ -11,18 +11,18 @@ document.addEventListener('DOMContentLoaded', function () {
       hOne.textContent = 'Reserve table';
       hOne.className = 'hOne';
       header.appendChild(hOne);
-
+      // create slide container
       const slide = document.createElement('div');
       slide.className = 'slide';
       container.appendChild(slide);
-
+      // create images container
       const imgContainer = document.createElement('div');
       imgContainer.className = 'imgContainer';
       slide.appendChild(imgContainer);
 
-
-      function createImage() {
-            const images = ['/imgs/karma.png'];
+      // images function
+      function createImage(){
+            const images = ['/img/karma.png'];
             // const className =['sam', 'linda', 'karma']
             // const images = ['https://github.com/Wiz3Boudi/Little-Lemon/blob/main/PIC-description-1.jpg?raw=true',
             //       'https://github.com/Wiz3Boudi/Little-Lemon/blob/main/PIC-description-2-pesson.jpg?raw=true',
@@ -63,6 +63,10 @@ document.addEventListener('DOMContentLoaded', function () {
                   dotContainer.appendChild(dot);
             }
       }
+
+      // active slide
+      
+
 
 
 
