@@ -21,12 +21,8 @@ document.addEventListener('DOMContentLoaded', function () {
       slide.appendChild(imgContainer);
 
       // images function
-      function createImage(){
-            const images = ['/img/karma.png'];
-            // const className =['sam', 'linda', 'karma']
-            // const images = ['https://github.com/Wiz3Boudi/Little-Lemon/blob/main/PIC-description-1.jpg?raw=true',
-            //       'https://github.com/Wiz3Boudi/Little-Lemon/blob/main/PIC-description-2-pesson.jpg?raw=true',
-            //       'https://github.com/Wiz3Boudi/Little-Lemon/blob/main/withh1.jpg?raw=true'];
+      function createImage() {
+            const images = ['/img/linda.png'];
             for (let mg = 0; mg < images.length; mg++) {
                   const img = document.createElement('img');
                   img.src = [...images[mg]].join('');
@@ -65,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       // active slide
-      
+
 
 
 
