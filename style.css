@@ -46,11 +46,11 @@
 }
 
 .container .slide .Navigate .prev {
-      right: 0;
+      left: 0;
 }
 
 .container .slide .Navigate .next {
-      left: 0;
+      right: 0;
 }
 
 .container .slide .Navigate .prev:hover,

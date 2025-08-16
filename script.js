@@ -36,27 +36,27 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       // Create navigate / next and prev
-      const Navigate = document.createElement('div');
-      Navigate.className = 'Navigate'
-      slide.appendChild(Navigate);
-      // create prev
-      const prev = document.createElement('div');
-      prev.textContent = '❮';
-      prev.className = 'prev'
-      Navigate.appendChild(prev);
-      // create next 
-      const next = document.createElement('div');
-      next.textContent = '❯';
-      next.className = 'next'
-      Navigate.appendChild(next);
+      function createNavigatetion() {
+            const Navigate = document.createElement('div');
+            Navigate.className = 'Navigate'
+            slide.appendChild(Navigate);
+            // create next 
+            const next = document.createElement('div');
+            next.textContent = '❯';
+            next.className = 'next'
+            Navigate.appendChild(next);
+            // create prev
+            const prev = document.createElement('div');
+            prev.textContent = '❮';
+            prev.className = 'prev'
+            Navigate.appendChild(prev);
+      }
 
       // create dot
-      const dotContainer = document.createElement('div');
-      dotContainer.className = 'dotContainer';
-      slide.appendChild(dotContainer);
-
-
       function dot() {
+            const dotContainer = document.createElement('div');
+            dotContainer.className = 'dotContainer';
+            slide.appendChild(dotContainer);
             for (let i = 0; i < 3; i++) {
                   const dot = document.createElement('span');
                   dot.classList.add('dot');
@@ -74,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       createImage();
       dot();
+      createNavigatetion()
 })
 
 
