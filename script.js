@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
+      let currentIndex = 0;
+      let slideInterval;
+
       const container = document.createElement('div');
       container.className = 'container';
       document.body.appendChild(container);
@@ -38,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
                   cearImages.alt = imagsData.alt;
                   if (index !== 0) {
                         cearImages.style.display = 'none'; // Hide all images except first
+                        cearImages.classList.add('transtion');
                   }
                   imgContainer.appendChild(cearImages);
             });
@@ -56,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
             prev.addEventListener('click', () => {
                   currentIndex--;
                   showSlide(currentIndex);
+                  resetInterval();
             });
             Navigate.appendChild(prev);
 
@@ -66,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
             next.addEventListener('click', () => {
                   currentIndex++;
                   showSlide(currentIndex);
+                  resetInterval();
             });
             Navigate.appendChild(next);
       }
@@ -80,11 +86,14 @@ document.addEventListener('DOMContentLoaded', function () {
             for (let i = 0; i < images.length; i++) {
                   const dot = document.createElement('span');
                   dot.classList.add('dot');
+                  dot.classList.add('transtion')
                   dot.addEventListener('click', () => {
                         showSlide(i);
+                        resetInterval();
                   });
                   if (i === 0) {
                         dot.classList.add('active');
+                        dot.classList.add('transtion')
                   }
                   dotContainer.appendChild(dot);
             }
@@ -92,21 +101,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Show slide function
       function showSlide(index) {
+            if (typeof index === 'number') {
+                  currentIndex = index;
+            }
             const images = document.querySelectorAll('.images');
             const dots = document.querySelectorAll('.dot');
 
             // Handle wrap-around
-            if (index >= images.length) {
-                  currentIndex = 0;
-            } else if (index < 0) {
-                  currentIndex = images.length - 1;
-            } else {
-                  currentIndex = index;
-            }
-
+            if (currentIndex >= images.length) { currentIndex = 0; }
+            if (currentIndex < 0) { currentIndex = images.length - 1; }
             // Update images
             images.forEach((img, i) => {
                   img.style.display = i === currentIndex ? 'block' : 'none';
+                  img.classList.add('transtion');
             });
 
             // Update dots
@@ -115,11 +122,22 @@ document.addEventListener('DOMContentLoaded', function () {
             });
       }
 
+      // Auto slide logic
+      function nextSlide() {
+            currentIndex++;
+            showSlide(currentIndex);
+      }
+
+      function startSlides() {
+            slideInterval = setInterval(nextSlide, 3000);
+      }
+
+      function resetInterval() {
+            clearInterval(slideInterval);
+            startSlides();
+      }
+
       createImage();
       createDots();
-      createNavigation();
-
-      // Initialize slideshow
-      let currentIndex = 0;
-      showSlide(currentIndex);
+      createNavigation()
 });

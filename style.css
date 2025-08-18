@@ -28,8 +28,10 @@
       flex-shrink: 0;
       border-radius: 3px;
 }
-.container .slide .imgContainer img.active{
+
+.container .slide .imgContainer img.active {
       display: none;
+      transition: ease 2s;
 }
 
 .container .slide .Navigate {
@@ -65,7 +67,7 @@
 
 .container .slide .Navigate .prev:hover,
 .next:hover {
-      background-color: rgba(0, 0, 0, 0.100);
+      background-color: rgba(0, 0, 0, 0.815);
 }
 
 .container .slide .dotContainer {
@@ -87,11 +89,9 @@
 .dot:hover {
       background-color: #717171;
 }
-.transtion{
-      transition: ease 1s;
-}
-.images{
-      display: none;
+
+.transtion {
+      transition: ease 2s;
 }
 
 
