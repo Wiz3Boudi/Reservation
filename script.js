@@ -1,172 +1,125 @@
 document.addEventListener('DOMContentLoaded', function () {
-
       const container = document.createElement('div');
-      container.className = 'container'
-      document.body.appendChild(container)
-      // craete header / h1
+      container.className = 'container';
+      document.body.appendChild(container);
+
+      // Create header
       const header = document.createElement('div');
       header.className = 'header';
       container.appendChild(header);
-      const hOne = document.createElement('h1')
+      const hOne = document.createElement('h1');
       hOne.textContent = 'Reserve table';
       hOne.className = 'hOne';
       header.appendChild(hOne);
-      // create slide container
+
+      // Create slide container
       const slide = document.createElement('div');
       slide.className = 'slide';
       container.appendChild(slide);
-      // create images container
+
+      // Create images container
       const imgContainer = document.createElement('div');
       imgContainer.className = 'imgContainer';
       slide.appendChild(imgContainer);
 
-      // images function
+      // Images function
       function createImage() {
-            const images = ['/img/linda.png'];
-            for (let mg = 0; mg < images.length; mg++) {
-                  const img = document.createElement('img');
-                  img.src = [...images[mg]].join('');
-                  // img.className = [...className[mg]];
-                  imgContainer.appendChild(img)
-            }
+            const imagsData = [
+                  { id: 'image1', src: '/img/sam.png', class: 'images', alt: 'Slide Show Images' },
+                  { id: 'image2', src: '/img/linda.png', class: 'images', alt: 'Slide Show Images' },
+                  { id: 'image3', src: '/img/karma.png', class: 'images', alt: 'Slide Show Images' }
+            ];
+
+            imagsData.forEach((imagsData, index) => {
+                  const cearImages = document.createElement('img');
+                  cearImages.id = imagsData.id;
+                  cearImages.className = imagsData.class;
+                  cearImages.src = imagsData.src;
+                  cearImages.alt = imagsData.alt;
+                  if (index !== 0) {
+                        cearImages.style.display = 'none'; // Hide all images except first
+                  }
+                  imgContainer.appendChild(cearImages);
+            });
       }
 
-      // Create navigate / next and prev
-      function createNavigatetion() {
+      // Create navigation
+      function createNavigation() {
             const Navigate = document.createElement('div');
-            Navigate.className = 'Navigate'
+            Navigate.className = 'Navigate';
             slide.appendChild(Navigate);
-            // create next 
-            const next = document.createElement('div');
-            next.textContent = '❯';
-            next.className = 'next'
-            Navigate.appendChild(next);
-            // create prev
+
+            // Create prev
             const prev = document.createElement('div');
             prev.textContent = '❮';
-            prev.className = 'prev'
+            prev.className = 'prev';
+            prev.addEventListener('click', () => {
+                  currentIndex--;
+                  showSlide(currentIndex);
+            });
             Navigate.appendChild(prev);
+
+            // Create next
+            const next = document.createElement('div');
+            next.textContent = '❯';
+            next.className = 'next';
+            next.addEventListener('click', () => {
+                  currentIndex++;
+                  showSlide(currentIndex);
+            });
+            Navigate.appendChild(next);
       }
 
-      // create dot
-      function dot() {
+      // Create dots
+      function createDots() {
             const dotContainer = document.createElement('div');
             dotContainer.className = 'dotContainer';
             slide.appendChild(dotContainer);
-            for (let i = 0; i < 3; i++) {
+
+            const images = document.querySelectorAll('.images');
+            for (let i = 0; i < images.length; i++) {
                   const dot = document.createElement('span');
                   dot.classList.add('dot');
+                  dot.addEventListener('click', () => {
+                        showSlide(i);
+                  });
+                  if (i === 0) {
+                        dot.classList.add('active');
+                  }
                   dotContainer.appendChild(dot);
             }
       }
 
-      // active slide
+      // Show slide function
+      function showSlide(index) {
+            const images = document.querySelectorAll('.images');
+            const dots = document.querySelectorAll('.dot');
 
+            // Handle wrap-around
+            if (index >= images.length) {
+                  currentIndex = 0;
+            } else if (index < 0) {
+                  currentIndex = images.length - 1;
+            } else {
+                  currentIndex = index;
+            }
 
+            // Update images
+            images.forEach((img, i) => {
+                  img.style.display = i === currentIndex ? 'block' : 'none';
+            });
 
-
-
-
-
-
-
-
+            // Update dots
+            dots.forEach((dot, i) => {
+                  dot.classList.toggle('active', i === currentIndex);
+            });
+      }
 
       createImage();
-      dot();
-      createNavigatetion()
-})
+      createDots();
+      createNavigation();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// document.addEventListener('DOMContentLoaded', function () {
-//       const slider = document.querySelector('.slider');
-//       const slides = document.querySelectorAll('.slider img');
-//       const prevBtn = document.querySelector('.prev');
-//       const nextBtn = document.querySelector('.next');
-//       const dotsContainer = document.querySelector('.dots-container');
-
-//       let currentIndex = 0;
-//       let slideInterval;
-//       const slideTime = 3000; // 3 seconds
-
-//       // Create dots
-//       slides.forEach((_, index) => {
-//             const dot = document.createElement('span');
-//             dot.classList.add('dot');
-//             if (index === 0) dot.classList.add('active-dot');
-//             dot.addEventListener('click', () => goToSlide(index));
-//             dotsContainer.appendChild(dot);
-//       });
-
-//       const dots = document.querySelectorAll('.dot');
-
-//       // Function to move to specific slide
-//       function goToSlide(index) {
-//             currentIndex = index;
-//             updateSlider();
-//             resetInterval();
-//       }
-
-//       // Update slider position and active dot
-//       function updateSlider() {
-//             slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-
-//             dots.forEach((dot, index) => {
-//                   dot.classList.toggle('active-dot', index === currentIndex);
-//             });
-//       }
-
-//       // Next slide
-//       function nextSlide() {
-//             currentIndex = (currentIndex + 1) % slides.length;
-//             updateSlider();
-//       }
-
-//       // Previous slide
-//       function prevSlide() {
-//             currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-//             updateSlider();
-//       }
-
-//       // Reset auto slide interval
-//       function resetInterval() {
-//             clearInterval(slideInterval);
-//             slideInterval = setInterval(nextSlide, slideTime);
-//       }
-
-//       // Event listeners
-//       nextBtn.addEventListener('click', () => {
-//             nextSlide();
-//             resetInterval();
-//       });
-
-//       prevBtn.addEventListener('click', () => {
-//             prevSlide();
-//             resetInterval();
-//       });
-
-//       // Start auto sliding
-//       resetInterval();
-
-//       // Pause on hover
-//       slider.addEventListener('mouseenter', () => clearInterval(slideInterval));
-//       slider.addEventListener('mouseleave', resetInterval);
-// });
+      // Initialize slideshow
+      let currentIndex = 0;
+      showSlide(currentIndex);
+});
